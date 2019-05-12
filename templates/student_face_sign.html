@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/student_face_sign.css' %}"  media="screen,projection"/>
+{% endblock %}
+
+{% block title %}学生签到页面{% endblock %}
+
+{% block content %}
+<a class="endsign" href="{% url 'teacher' %}">结束签到</a>
+
+<div class="videoall">
+<div class="videoblock">
+<video id="video" width="500px" height="500px" autoplay="autoplay"></video>
+<canvas id="canvas" width="500px" height="500px" style="visibility: hidden;"></canvas>
+</div>
+
+<div class="studenname">
+<span id="signstudent">扫描中...</span>
+</div>
+</div>
+<script>
+getMedia()
+setInterval(takePhotoAndUpload,1200)
+
+function getMedia() {
+    let constraints = {
+        video: {width: 500, height: 500},
+        audio: true
+    };
+    let video = document.getElementById("video");
+    let promise = navigator.mediaDevices.getUserMedia(constraints);
+    promise.then(function (MediaStream) {
+        video.srcObject = MediaStream;
+        video.play();
+    });
+}
+function takePhoto() {
+    let video2 = document.getElementById("video");
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(video2, 0, 0, 500, 500);
+}
+function uploadPhoto() {
+    var imgData=document.getElementById("canvas").toDataURL("image/jpg");
+    var data=imgData.substr(22);
+    var url = "/studentfacesign/{{ course_id }}/"
+    $.post(url,{image:data,},
+    function(data,status){
+        if (data.name != null)
+            if (data.repeat === true)
+                $("#signstudent").html(data.no+' '+data.name+'<br>已签到成功，无需重复签到。');
+            else
+                $("#signstudent").html(data.no+' '+data.name+'<br>签到成功!!!');
+    },"json")
+}
+function takePhotoAndUpload() {
+    {#setTimeout(takePhoto,1000)#}
+    takePhoto()
+    uploadPhoto()
+}
+</script>
+{% endblock %}
+
+<!-- 这是教师端人脸扫描签到页面，使用navigator.mediaDevices.getUserMedia()方法调用网页摄像头,再通过canvas中的drawImage()方法截取图片实现拍照功能,
+toDataURL("image/jpg")方法可获得图片的Base64编码，这里还需要用substr(22)将图片一些额外信息去除。在实现功能时碰到了一些问题，getUserMedia()是异步执行的，
+所以在执行canvas的drawImage方法需要延时一下等待getUserMedia执行完,所以写了个无限循环然后加上setTimeout(function,delay_time_ms)延时，
+但是这方法一执行页面就卡死根本行不通，后面发现了setInterval(function,delay_cycle_time_ms)方法，setInterval是一个windows的方法可以按照指定周期来调用函数并且不会像自己写的死循环那样导致程序崩溃
+-->

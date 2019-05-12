@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/teacher.css' %}"  media="screen,projection"/>
+{% endblock %}
+
+{% block title %}教师管理页面{% endblock %}
+
+{% block content %}
+<div class="mycourseblock">
+<h5>我的课程</h5>
+<div class="mycourse">
+{% for course in courses %}
+<span>课程号:{{ course.no }}</span>
+<span>课程名:{{ course.course_name }}</span>
+<span>创建时间:{{ course.create_time|date:'Y-m-d H:i:s' }}</span>
+<br>
+<div class="atag">
+<a href="{% url 'studentlist' course_id=course.no %}">所有学生</a>
+<a href="{% url 'studentfacesign' course_id=course.no %}">开启签到</a>
+</div>
+<hr>
+{% endfor %}
+</div>
+</div>
+
+<div class="addcourse">
+<h5>添加课程</h5>
+<form action="/teacher/" method="post">
+<div class="form-group">
+<input name="no" type="text" class="form-control" id="formGroupExampleInput" placeholder="请输入课程号">
+</div>
+<div class="form-group">
+<input name="course_name" type="text" class="form-control" id="formGroupExampleInput2" placeholder="请输入课程名">
+</div>
+<button class="submitbtn">创建</button>
+</form>
+</div>
+
+{% endblock %}

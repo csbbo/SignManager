@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/student.css' %}"/>
+{% endblock %}
+
+{% block title %}学生管理页面{% endblock %}
+
+{% block content %}
+<h3 class="mycourse">我的课程</h3>
+{% for signsheet in signsheets %}
+<div class="course">
+<span>课程号:{{ signsheet.course.no }}</span>
+<span>课程名:{{ signsheet.course.course_name }}</span>
+<span>签到次数:{{ signsheet.count }}</span>
+</div>
+{% endfor %}
+<h3 class="addcourse">加入课程</h3>
+<form action="/student/" method="post">
+<div class="form-group">
+<input name="value" type="text" class="form-control" id="formGroupExampleInput" placeholder="请输入课程号或课程名">
+</div>
+<button type="submit">提交</button>
+</form>
+
+<div class="uploadblock">
+<a class="uploadavatar" href="{% url 'uploadface' %}">上传头像</a>
+</div>
+{% endblock %}

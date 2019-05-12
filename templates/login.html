@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block title %}登录{% endblock %}
+
+{% block content %}
+
+<form action="/login/" method="post">
+  <div class="form-group">
+    <input name="no_or_name" type="text" class="form-control" id="formGroupExampleInput" placeholder="学号/教师号/姓名">
+  </div>
+  <div class="form-group">
+    <input name="password" type="password" class="form-control" id="formGroupExampleInput2" placeholder="密码">
+  </div>
+  <button class="loginbtn" type="submit">登录</button>
+</form>
+{% endblock %}

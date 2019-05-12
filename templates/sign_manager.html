@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>GET VIDEO</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+    <button onclick="getMedia()">开启摄像头</button>
+	<video id="video" width="500px" height="500px" autoplay="autoplay"></video>
+	<canvas id="canvas" width="500px" height="500px"></canvas>
+	<button id="snap" onclick="takePhoto()">拍照</button>
+	<button id="snap" onclick="uploadPhoto()">上传</button>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+        function getMedia() {
+            let constraints = {
+                video: {width: 500, height: 500},
+                audio: true
+            };
+            //获得video摄像头区域
+            let video = document.getElementById("video");
+            //这里介绍新的方法，返回一个 Promise对象
+            // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
+            // then()是Promise对象里的方法
+            // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
+            // 避免数据没有获取到
+            let promise = navigator.mediaDevices.getUserMedia(constraints);
+            promise.then(function (MediaStream) {
+                video.srcObject = MediaStream;
+                video.play();
+            });
+        }
+ 
+        function takePhoto() {
+          //获得Canvas对象
+          let video = document.getElementById("video");
+          let canvas = document.getElementById("canvas");
+          let ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, 500, 500);
+        }
+        function uploadPhoto(){
+            var imgData=document.getElementById("canvas").toDataURL("image/jpg");
+            var data=imgData.substr(22);
+            $.post("/face/",{img:data,},
+            function(){
+            });
+        }
+    </script>
+
+    <form action="/photograph/" method="post" enctype="multipart/form-data">
+        <input class="upload" type="file" name="image">
+        <button class="btn" type="submit">上传头像</button>
+    </form>
+</body>

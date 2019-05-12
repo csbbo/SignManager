@@ -1,0 +1,45 @@
+.mycourse{
+    color: #444;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.course{
+    background-color: #ffffff;
+    width: 300px;
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.addcourse{
+    color: #444;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+form{
+    width: 300px;
+    margin-left: 20px;
+    background-color: #ffffff;
+    padding: 10px;
+}
+form button{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 8px;
+    border: none;
+    padding: 3px;
+    width: 100%;
+    margin-top: 5px;
+    background-color: #bbb;
+}
+.uploadblock{
+    margin-top: 20px;
+}
+.uploadavatar{
+    text-decoration: none;
+    background-color: #ffffff;
+    margin-left: 20px;
+    padding: 5px;
+}
+.uploadavatar:hover{
+    text-decoration: none;
+}

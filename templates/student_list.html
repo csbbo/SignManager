@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/student_list.css' %}"/>
+{% endblock %}
+
+{% block title %}学生列表{% endblock %}
+
+{% block content %}
+<ul>
+<a class="goback" href="{% url 'teacher' %}">回到管理页</a>
+<div class="studentlist">
+{% for signsheet in signsheets %}
+<li>
+    <span>学号:{{ signsheet.student.no }}</span>
+    <span>姓名:{{ signsheet.student.name }}</span>
+    <span>签到次数:{{ signsheet.count }}</span>
+    <hr>
+</li>
+{% empty %}
+    <h1>还没有学生加入该课程哟</h1>
+{% endfor %}
+</div>
+
+</ul>
+{% endblock %}

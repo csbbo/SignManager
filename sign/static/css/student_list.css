@@ -1,0 +1,18 @@
+.goback{
+    background-color: #ffffff;
+    padding: 5px;
+}
+.goback:hover{
+    text-decoration: none;
+}
+.studentlist{
+    padding: 0;
+    background-color: #ffffff;
+    padding: 10px;
+}
+.studentlist li{
+    list-style: none;
+}
+.studentlist li span{
+    margin: 0 4px;
+}

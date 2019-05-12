@@ -1,0 +1,24 @@
+.endsign{
+    background-color: #ffffff;
+    padding: 8px;
+}
+.endsign:hover{
+    text-decoration: none;
+}
+.videoall{
+    width: 800px;
+    margin: 0 auto;
+}
+.videoblock{
+    width: 540px;
+    height: 540px;
+    float: left;
+    padding: 20px;
+}
+.studenname{
+    width: 160px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 15px;
+    font-size: 20px;
+}

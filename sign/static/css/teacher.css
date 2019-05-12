@@ -1,0 +1,50 @@
+
+.mycourseblock{
+    margin-left: 10px;
+    width: 510px;
+    float: left;
+    margin-top: 20px;
+}
+.mycourse{
+    background-color: #ffffff;
+    padding: 10px;
+}
+.mycourse span{
+    padding: 2px;
+    margin: 0 2px;
+}
+.atag{
+    margin-top: 10px;
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+.atag a:hover{
+    text-decoration: none;
+}
+hr{
+    clear: both;
+}
+.addcourse{
+    float: left;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+form{
+    width: 450px;
+    background-color: #ffffff;
+    padding: 60px 20px;
+}
+.submitbtn{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 8px;
+    border: none;
+    padding: 3px;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #bbb;
+}
+.submitbtn:hover{
+    background-color: #999;
+}

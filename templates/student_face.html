@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/student_face.css' %}"  media="screen,projection"/>
+{% endblock %}
+
+{% block title %}学生管理页面{% endblock %}
+
+{% block content %}
+<div class="uploadavatar">
+<a class="goback" href="{% url 'student' %}">回到信息管理页面</a><br>
+<div class="videocontrol">
+<button onclick="getMedia()">开启摄像头</button>
+<button onclick="takePhoto()">拍照</button>
+<br>
+<video class="video" id="video" width="500px" height="500px" autoplay="autoplay"></video>
+</div>
+<div class="canvasblock">
+<button onclick="uploadPhoto()">上传</button><br>
+<canvas class="canvas" id="canvas" width="500px" height="500px"></canvas>
+</div>
+
+<form action="/uploadface/" method="post" enctype="multipart/form-data">
+    <input class="upload" type="file" name="image">
+    <button class="submitbtn" type="submit">上传头像</button>
+</form>
+</div>
+
+<script>
+    function getMedia() {
+        let constraints = {
+            video: {width: 500, height: 500},
+            audio: true
+        };
+        //获得video摄像头区域
+        let video = document.getElementById("video");
+        //这里介绍新的方法，返回一个 Promise对象
+        // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
+        // then()是Promise对象里的方法
+        // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
+        // 避免数据没有获取到
+        let promise = navigator.mediaDevices.getUserMedia(constraints);
+        promise.then(function (MediaStream) {
+            video.srcObject = MediaStream;
+            video.play();
+        });
+    }
+
+    function takePhoto() {
+      //获得Canvas对象
+      let video = document.getElementById("video");
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, 500, 500);
+    }
+    function uploadPhoto(){
+        var imgData=document.getElementById("canvas").toDataURL("image/jpg");
+        var data=imgData.substr(22);
+        $.post("/uploadface/",{image:data,},
+        function(){
+        });
+    }
+</script>
+{% endblock %}

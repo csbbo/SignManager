@@ -1,0 +1,49 @@
+.uploadavatar{
+    margin: auto;
+    width: 1110px;
+}
+.goback{
+    color: #999;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 15px;
+}
+.goback:hover{
+    text-decoration: none;
+}
+.videocontrol{
+    background-color: #ffffff;
+    padding: 10px;
+    margin: 15px;
+    width: 520px;
+    height: 560px;
+    float: left;
+}
+.video{
+    margin-top: 10px;
+}
+.canvasblock{
+    padding: 10px;
+    float: left;
+    background-color: #ffffff;
+    margin: 15px;
+    width: 520px;
+    height: 560px;
+}
+.canvas{
+    margin-top: 10px;
+}
+form{
+    clear: both;
+    background-color: #ffffff;
+    margin: 15px;
+    width: 520px;
+    padding: 10px;
+}
+.submitbtn{
+    background-color: #ccc;
+    border: none;
+    padding: 3px;
+    float: right;
+}

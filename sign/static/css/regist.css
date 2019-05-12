@@ -1,0 +1,19 @@
+form{
+    width: 450px;
+    margin: 80px auto;
+    background-color: #ffffff;
+    padding: 60px 20px;
+}
+.registbtn{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 8px;
+    border: none;
+    padding: 3px;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #bbb;
+}
+.registbtn:hover{
+    background-color: #999;
+}
